@@ -1,0 +1,1 @@
+d = {'method' : 'GET','endpoint' : '/users','data' : {'id' : 10}}

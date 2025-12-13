@@ -1,0 +1,869 @@
+[
+    {
+        "title": "LMS_Information",
+        "version": "1.0.0-alpha.7",
+        "description": "API for Requesting and subscribing on Location Information from LMS Service.  \n\u00c2\u00a9 2025, 3GPP Organizational Partners (ARIB, ATIS, CCSA, ETSI, TSDSI, TTA, TTC).  \nAll rights reserved.\n",
+        "servers": [
+            {
+                "url": "{apiRoot}/lms-information/v1",
+                "variables": {
+                    "apiRoot": {
+                        "default": "https://example.com",
+                        "description": "apiRoot as defined in clause 8.2.44D1 of 3GPP TS 24.483"
+                    }
+                }
+            }
+        ],
+        "tags": [],
+        "endpoints": [
+            {
+                "path": "/requests",
+                "method": "POST",
+                "request_schema": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ClientOriginatingLocationRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful location request submitted from LMC.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ClientOriginatingLocationRequest"
+                                }
+                            }
+                        },
+                        "headers": {
+                            "Location": {
+                                "description": "Contains the URI of the newly created resource.",
+                                "required": true,
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/404"
+                    },
+                    "411": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/411"
+                    },
+                    "413": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/413"
+                    },
+                    "415": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/415"
+                    },
+                    "429": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/500"
+                    },
+                    "503": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/503"
+                    },
+                    "default": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/default"
+                    }
+                },
+                "authentication": {
+                    "BearerAuth": {
+                        "type": "http",
+                        "scheme": "bearer"
+                    }
+                }
+            },
+            {
+                "path": "/subscriptions",
+                "method": "POST",
+                "request_schema": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/LocationSubscriptionRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful location subscription request submitted to LMS.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/LocationSubscriptionRequest"
+                                }
+                            }
+                        },
+                        "headers": {
+                            "Location": {
+                                "description": "Contains the URI of the newly created resource.",
+                                "required": true,
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/404"
+                    },
+                    "411": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/411"
+                    },
+                    "413": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/413"
+                    },
+                    "415": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/415"
+                    },
+                    "429": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/500"
+                    },
+                    "503": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/503"
+                    },
+                    "default": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/default"
+                    }
+                },
+                "authentication": {
+                    "BearerAuth": {
+                        "type": "http",
+                        "scheme": "bearer"
+                    }
+                }
+            },
+            {
+                "path": "/subscriptions/{subscriptionId}",
+                "method": "PUT",
+                "request_schema": {
+                    "description": "Parameters to replace the existing subscription.",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/LocationSubscriptionRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK. The location subcsription resource was updated successfully.\n",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/LocationSubscriptionRequest"
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "No Content (updated successfully)."
+                    },
+                    "400": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/404"
+                    },
+                    "411": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/411"
+                    },
+                    "413": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/413"
+                    },
+                    "415": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/415"
+                    },
+                    "429": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/500"
+                    },
+                    "503": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/503"
+                    },
+                    "default": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/default"
+                    }
+                },
+                "authentication": {
+                    "BearerAuth": {
+                        "type": "http",
+                        "scheme": "bearer"
+                    }
+                }
+            },
+            {
+                "path": "/subscriptions/{subscriptionId}",
+                "method": "DELETE",
+                "request_schema": null,
+                "responses": {
+                    "204": {
+                        "description": "A location subscription resource deleted successfully.\n"
+                    },
+                    "307": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/307"
+                    },
+                    "308": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/308"
+                    },
+                    "400": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/404"
+                    },
+                    "429": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/500"
+                    },
+                    "503": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/503"
+                    },
+                    "default": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/default"
+                    }
+                },
+                "authentication": {
+                    "BearerAuth": {
+                        "type": "http",
+                        "scheme": "bearer"
+                    }
+                }
+            },
+            {
+                "path": "/configrequest",
+                "method": "POST",
+                "request_schema": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "TS24283_Lms_Reporting.yaml#/components/schemas/LocationConfiguration"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful configuration update request submitted to LMS",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "TS24283_Lms_Reporting.yaml#/components/schemas/LocationConfiguration"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/404"
+                    },
+                    "411": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/411"
+                    },
+                    "413": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/413"
+                    },
+                    "415": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/415"
+                    },
+                    "429": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/500"
+                    },
+                    "503": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/503"
+                    },
+                    "default": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/default"
+                    }
+                },
+                "authentication": {
+                    "BearerAuth": {
+                        "type": "http",
+                        "scheme": "bearer"
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "title": "LMS_Reporting",
+        "version": "1.0.0-alpha.8",
+        "description": "API for Registration and location reporting to LMS Service.  \n\u00c2\u00a9 2025, 3GPP Organizational Partners (ARIB, ATIS, CCSA, ETSI, TSDSI, TTA, TTC).  \nAll rights reserved.\n",
+        "servers": [
+            {
+                "url": "{apiRoot}/lms-reporting/v1",
+                "variables": {
+                    "apiRoot": {
+                        "default": "https://example.com",
+                        "description": "apiRoot as defined in clause 8.2.44D1 of 3GPP TS 24.483"
+                    }
+                }
+            }
+        ],
+        "tags": [],
+        "endpoints": [
+            {
+                "path": "/registrations",
+                "method": "POST",
+                "request_schema": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/LMCRegistration"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful regitration of LMC.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/LMCRegistration"
+                                }
+                            }
+                        },
+                        "headers": {
+                            "Location": {
+                                "description": "Contains the URI of the newly created resource.",
+                                "required": true,
+                                "schema": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/404"
+                    },
+                    "411": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/411"
+                    },
+                    "413": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/413"
+                    },
+                    "415": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/415"
+                    },
+                    "429": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/500"
+                    },
+                    "503": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/503"
+                    },
+                    "default": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/default"
+                    }
+                },
+                "authentication": {
+                    "BearerAuth": {
+                        "type": "http",
+                        "scheme": "bearer"
+                    }
+                }
+            },
+            {
+                "path": "/registrations/{registrationId}",
+                "method": "PUT",
+                "request_schema": {
+                    "description": "Parameters to replace the existing subscription.",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/LMCRegistration"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK. The individual LMC registration resource was updated successfully.\n",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/LMCRegistration"
+                                }
+                            }
+                        }
+                    },
+                    "204": {
+                        "description": "No Content (updated successfully)."
+                    },
+                    "400": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/404"
+                    },
+                    "411": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/411"
+                    },
+                    "413": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/413"
+                    },
+                    "415": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/415"
+                    },
+                    "429": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/500"
+                    },
+                    "503": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/503"
+                    },
+                    "default": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/default"
+                    }
+                },
+                "authentication": {
+                    "BearerAuth": {
+                        "type": "http",
+                        "scheme": "bearer"
+                    }
+                }
+            },
+            {
+                "path": "/registrations/{registrationId}",
+                "method": "DELETE",
+                "request_schema": null,
+                "responses": {
+                    "204": {
+                        "description": "An individual LMC registration resource deleted successfully.\n"
+                    },
+                    "307": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/307"
+                    },
+                    "308": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/308"
+                    },
+                    "400": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/404"
+                    },
+                    "429": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/500"
+                    },
+                    "503": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/503"
+                    },
+                    "default": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/default"
+                    }
+                },
+                "authentication": {
+                    "BearerAuth": {
+                        "type": "http",
+                        "scheme": "bearer"
+                    }
+                }
+            },
+            {
+                "path": "/locationreports",
+                "method": "POST",
+                "request_schema": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/MCUELocation"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Successful submission of location report.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/MCUELocation"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/404"
+                    },
+                    "411": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/411"
+                    },
+                    "413": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/413"
+                    },
+                    "415": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/415"
+                    },
+                    "429": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/500"
+                    },
+                    "503": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/503"
+                    },
+                    "default": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/default"
+                    }
+                },
+                "authentication": {
+                    "BearerAuth": {
+                        "type": "http",
+                        "scheme": "bearer"
+                    }
+                }
+            },
+            {
+                "path": "/configurations",
+                "method": "GET",
+                "request_schema": null,
+                "responses": {
+                    "200": {
+                        "description": "Successful submission of location report.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/LocationConfiguration"
+                                }
+                            }
+                        }
+                    },
+                    "307": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/307"
+                    },
+                    "308": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/308"
+                    },
+                    "400": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/404"
+                    },
+                    "406": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/406"
+                    },
+                    "429": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/500"
+                    },
+                    "503": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/503"
+                    },
+                    "default": {
+                        "$ref": "TS29571_CommonData.yaml#/components/responses/default"
+                    }
+                },
+                "authentication": {
+                    "BearerAuth": {
+                        "type": "http",
+                        "scheme": "bearer"
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "title": "ETC_Configuration",
+        "version": "1.1.0-alpha.1",
+        "description": "API for event triggered network slice adaptation configuration.  \n\u00c2\u00a9 2025, 3GPP Organizational Partners (ARIB, ATIS, CCSA, ETSI, TSDSI, TTA, TTC).  \nAll rights reserved.\n",
+        "servers": [
+            {
+                "url": "{apiRoot}/su_nsc/v1",
+                "variables": {
+                    "apiRoot": {
+                        "default": "https://example.com",
+                        "description": "apiRoot as defined in clause 5.2.4 of 3GPP TS 29.122."
+                    }
+                }
+            }
+        ],
+        "tags": [],
+        "endpoints": [
+            {
+                "path": "/val-services/{valServiceId}/configurations/{configurationId}",
+                "method": "PUT",
+                "request_schema": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NwSliceAdptEvent"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "204": {
+                        "description": "No Content. The requested network slice adaptation is successfully processed.\n"
+                    },
+                    "307": {
+                        "$ref": "TS29122_CommonData.yaml#/components/responses/307"
+                    },
+                    "308": {
+                        "$ref": "TS29122_CommonData.yaml#/components/responses/308"
+                    },
+                    "400": {
+                        "$ref": "TS29122_CommonData.yaml#/components/responses/400"
+                    },
+                    "401": {
+                        "$ref": "TS29122_CommonData.yaml#/components/responses/401"
+                    },
+                    "403": {
+                        "$ref": "TS29122_CommonData.yaml#/components/responses/403"
+                    },
+                    "404": {
+                        "$ref": "TS29122_CommonData.yaml#/components/responses/404"
+                    },
+                    "411": {
+                        "$ref": "TS29122_CommonData.yaml#/components/responses/411"
+                    },
+                    "413": {
+                        "$ref": "TS29122_CommonData.yaml#/components/responses/413"
+                    },
+                    "415": {
+                        "$ref": "TS29122_CommonData.yaml#/components/responses/415"
+                    },
+                    "429": {
+                        "$ref": "TS29122_CommonData.yaml#/components/responses/429"
+                    },
+                    "500": {
+                        "$ref": "TS29122_CommonData.yaml#/components/responses/500"
+                    },
+                    "503": {
+                        "$ref": "TS29122_CommonData.yaml#/components/responses/503"
+                    },
+                    "default": {
+                        "$ref": "TS29122_CommonData.yaml#/components/responses/default"
+                    }
+                },
+                "authentication": {
+                    "oAuth2ClientCredentials": {
+                        "type": "oauth2",
+                        "flows": {
+                            "clientCredentials": {
+                                "tokenUrl": "{tokenUrl}",
+                                "scopes": {}
+                            }
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "title": "NSCE_SliceInfo",
+        "version": "1.1.0-alpha.1",
+        "description": "API for notification of slice information.  \n\u00c2\u00a9 2025, 3GPP Organizational Partners (ARIB, ATIS, CCSA, ETSI, TSDSI, TTA, TTC).  \nAll rights reserved.\n",
+        "servers": [
+            {
+                "url": "{apiRoot}/nsce_sliceinfo/v1",
+                "variables": {
+                    "apiRoot": {
+                        "default": "https://example.com",
+                        "description": "apiRoot as defined in clause 5.2.4 of 3GPP TS 29.122."
+                    }
+                }
+            }
+        ],
+        "tags": [],
+        "endpoints": [
+            {
+                "path": "/edn-slice-subscriptions",
+                "method": "POST",
+                "request_schema": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "$ref": "TS29122_CommonData.yaml#/components/responses/default"
+                    }
+                },
+                "authentication": {
+                    "oAuth2ClientCredentials": {
+                        "type": "oauth2",
+                        "flows": {
+                            "clientCredentials": {
+                                "tokenUrl": "{tokenUrl}",
+                                "scopes": {}
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "path": "/plmn-slice-subscriptions",
+                "method": "POST",
+                "request_schema": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "$ref": "TS29122_CommonData.yaml#/components/responses/default"
+                    }
+                },
+                "authentication": {
+                    "oAuth2ClientCredentials": {
+                        "type": "oauth2",
+                        "flows": {
+                            "clientCredentials": {
+                                "tokenUrl": "{tokenUrl}",
+                                "scopes": {}
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                "path": "/ns-info-subscriptions",
+                "method": "POST",
+                "request_schema": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {}
+                        }
+                    }
+                },
+                "responses": {
+                    "default": {
+                        "$ref": "TS29122_CommonData.yaml#/components/responses/default"
+                    }
+                },
+                "authentication": {
+                    "oAuth2ClientCredentials": {
+                        "type": "oauth2",
+                        "flows": {
+                            "clientCredentials": {
+                                "tokenUrl": "{tokenUrl}",
+                                "scopes": {}
+                            }
+                        }
+                    }
+                }
+            }
+        ]
+    }
+]

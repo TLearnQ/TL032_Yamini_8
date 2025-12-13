@@ -1,0 +1,35 @@
+{
+    "total_endpoints": 14,
+    "http_methods": {
+        "POST": 8,
+        "PUT": 3,
+        "DELETE": 2,
+        "GET": 1
+    },
+    "auth_methods": [
+        "oAuth2ClientCredentials",
+        "BearerAuth"
+    ],
+    "endpoints_with_responses": 14,
+    "endpoints_missing_responses": 0,
+    "response_codes": [
+        "400",
+        "413",
+        "429",
+        "308",
+        "404",
+        "415",
+        "503",
+        "411",
+        "406",
+        "401",
+        "default",
+        "200",
+        "204",
+        "307",
+        "500",
+        "403",
+        "201"
+    ],
+    "coverage_percent": 100.0
+}
